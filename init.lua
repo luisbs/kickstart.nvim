@@ -65,6 +65,7 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
+  'gioele/vim-autoswap',
 
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -186,7 +187,7 @@ require('lazy').setup({
   --
   --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
-  { import = 'custom.plugins' },
+  -- { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -197,6 +198,7 @@ vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -288,7 +290,28 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'help', 'vim' },
+  ensure_installed = {
+    'ini', 'passwd',
+    'bash', 'vim', --'help',
+    'regex', 'comment', 'diff',
+    -- configuration
+    'gitignore', 'gitattributes', 'git_config', 'gitcommit', 'git_rebase',
+    'dockerfile',
+    -- data
+    'sql', 'graphql',
+    'yaml', 'toml', 'json', 'json5', 'jsonc', --'xml',
+    -- documentation
+    'markdown',
+    'jsdoc', 'luadoc', 'phpdoc',
+    -- compilation
+    'c', 'cpp', 'c_sharp',
+    'rust', 'go', 'kotlin',
+    -- scripting
+    'javascript', 'typescript', 'tsx',
+    'lua', 'php', 'python',
+    -- styling
+    'html', 'css', 'scss',
+  },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -365,7 +388,7 @@ local on_attach = function(_, bufnr)
   --
   -- In this case, we create a function that lets us more easily define mappings specific
   -- for LSP related items. It sets the mode, buffer and description for us each time.
-  local nmap = function(keys, func, desc)
+  local nmap = function(keys, desc, func)
     if desc then
       desc = 'LSP: ' .. desc
     end
@@ -373,27 +396,27 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>rn', '[R]e[n]ame', vim.lsp.buf.rename)
+  nmap('<leader>ca', '[C]ode [A]ction', vim.lsp.buf.code_action)
 
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('gd', '[G]oto [D]efinition', vim.lsp.buf.definition)
+  nmap('gr', '[G]oto [R]eferences', require('telescope.builtin').lsp_references)
+  nmap('gI', '[G]oto [I]mplementation', vim.lsp.buf.implementation)
+  nmap('<leader>D', 'Type [D]efinition', vim.lsp.buf.type_definition)
+  nmap('<leader>ds', '[D]ocument [S]ymbols', require('telescope.builtin').lsp_document_symbols)
+  nmap('<leader>ws', '[W]orkspace [S]ymbols', require('telescope.builtin').lsp_dynamic_workspace_symbols)
 
   -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('K', 'Hover Documentation', vim.lsp.buf.hover)
+  nmap('<C-k>', 'Signature Documentation', vim.lsp.buf.signature_help)
 
   -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
+  nmap('gD', '[G]oto [D]eclaration', vim.lsp.buf.declaration)
+  nmap('<leader>wa', '[W]orkspace [A]dd Folder', vim.lsp.buf.add_workspace_folder)
+  nmap('<leader>wr', '[W]orkspace [R]emove Folder', vim.lsp.buf.remove_workspace_folder)
+  nmap('<leader>wl', '[W]orkspace [L]ist Folders', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  end)
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
@@ -407,18 +430,20 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-
+  vimls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
+
+  stylelint_lsp = {},
+  -- clangd = {},
+  -- gopls = {},
+  -- pyright = {},
+  -- rust_analyzer = {},
+  -- tsserver = {},
 }
 
 -- Setup neovim lua configuration
