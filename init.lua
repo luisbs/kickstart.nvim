@@ -102,19 +102,22 @@ require('lazy').setup({
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
-  -- LSP, Linters, Formatters, etc. Configuration
-  require 'kickstart.plugins.mason',
   -- Highlight, edit, and navigate code
-  require 'kickstart.plugins.treesitter',
+  require 'plugins.treesitter',
+  -- LSP, Linters, Formatters, etc. Configuration
+  require 'plugins.mason',
   -- Code Completion
-  require 'kickstart.plugins.completion',
+  require 'plugins.completion',
+  -- Theaming Plugins
+  require 'plugins.theme',
+  require 'plugins.indent-blankline',
+  require 'plugins.colorizer',
   -- UI Plugins
-  require 'kickstart.plugins.theme',
-  require 'kickstart.plugins.telescope',
-  require 'kickstart.plugins.harpoon',
-  require 'kickstart.plugins.diffview',
+  require 'plugins.telescope',
+  require 'plugins.harpoon',
+  require 'plugins.diffview',
 
-  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
+  -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.luaplugins.indent-blankline`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
   --    up-to-date with whatever is in the kickstart repo.
   --
