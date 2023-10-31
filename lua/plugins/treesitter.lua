@@ -14,38 +14,16 @@ return {
     -- See `:help nvim-treesitter`
     require('nvim-treesitter.configs').setup {
       -- Add languages to be installed here that you want installed for treesitter
-      ensure_installed = {
-        'ini', 'passwd',
-        'bash', 'vim', --'help',
-        'regex', 'comment', 'diff',
-        -- configuration
-        'gitignore', 'gitattributes', 'git_config', 'gitcommit', 'git_rebase',
-        'dockerfile',
-        -- data
-        'sql', 'graphql',
-        'yaml', 'toml', 'json', 'json5', 'jsonc', --'xml',
-        -- documentation
-        'markdown',
-        'jsdoc', 'luadoc', 'phpdoc',
-        -- compilation
-        'c', 'cpp', 'c_sharp',
-        'rust', 'go', 'kotlin',
-        -- scripting
-        'javascript', 'typescript', 'tsx',
-        'lua', 'php', 'python',
-        -- styling
-        'html', 'css', 'scss',
-      },
-
+      ensure_installed = 'all',
       highlight = { enable = true },
-      indent = { enable = true, disable = { 'python' } },
+      indent = { enable = false },
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<c-space>',
-          node_incremental = '<c-space>',
-          scope_incremental = '<c-s>',
-          node_decremental = '<M-space>',
+          init_selection = 'gnn',
+          node_incremental = 'grn',
+          scope_incremental = 'grc',
+          node_decremental = 'grm',
         },
       },
       textobjects = {
@@ -93,5 +71,11 @@ return {
         },
       },
     }
+
+    vim.cmd[[
+      set foldmethod=expr
+      set foldexpr=nvim_treesitter#foldexpr()
+      set nofoldenable
+    ]]
   end,
 }

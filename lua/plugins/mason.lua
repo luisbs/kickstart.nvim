@@ -18,18 +18,20 @@ local servers = {
   },
 
   stylelint_lsp = {},
+
+  --intelephense = {},
   phpactor = {
     -- for details on the configuration of Phpactor
     -- see: https://phpactor.readthedocs.io/en/master/reference/configuration.html
 
     -- enables integrations with PHP-CS-fixer (formatter)
-    ['language_server_php_cs_fixer.enabled'] = true,
+    --['language_server_php_cs_fixer.enabled'] = true,
 
     -- enable integration with Psalm (lsp/linter)
     --["language_server_psalm.enabled"] = true,
 
     -- enables integration with PHPStan (linter)
-    ["language_server_phpstan.enabled"] = true,
+    --["language_server_phpstan.enabled"] = true,
     --["language_server_phpstan.level"],
 
     -- enables integration with PHPUnit (testing)

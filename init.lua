@@ -188,5 +188,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Helps
 -- Regex search `:help \v` or see: https://vimdoc.sourceforge.net/htmldoc/pattern.html#/%5Cv
 
+local opts = { silent = true, noremap = true }
+vim.keymap.set('n', '<Leader>le', ':Lex 20<Cr>', opts)
+vim.keymap.set('n', '<S-Up>', ':resize +2<CR>', opts)
+vim.keymap.set('n', '<S-Down>', ':resize -2<CR>', opts)
+vim.keymap.set('n', '<S-Left>', ':vertical resize -2<CR>', opts)
+vim.keymap.set('n', '<S-Right>', ':vertical resize +2<CR>', opts)
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
