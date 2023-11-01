@@ -19,7 +19,6 @@ Kickstart.nvim is a template for your own configuration.
 
   And then you can explore or search through `:help lua-guide`
 
-
 Kickstart Guide:
 
 I have left several `:help X` comments throughout the init.lua
@@ -36,14 +35,7 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now :)
 --]]
 
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
+require('custom.base')
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -128,44 +120,12 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
--- [[ Setting options ]]
--- See `:help vim.o`
-
--- Set highlight on search
-vim.o.hlsearch = false
-
--- Make line numbers default
-vim.wo.number = true
-vim.wo.relativenumber = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
 
 -- Enable break indent
 vim.o.breakindent = true
 
--- Save undo history
-vim.o.undofile = true
-
--- Case insensitive searching UNLESS /C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
 -- Keep signcolumn on by default
 vim.wo.signcolumn = 'yes'
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeout = true
-vim.o.timeoutlen = 300
-
--- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
 
 -- [[ Basic Keymaps ]]
 
@@ -190,13 +150,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Helps
 -- Regex search `:help \v` or see: https://vimdoc.sourceforge.net/htmldoc/pattern.html#/%5Cv
-
-local opts = { silent = true, noremap = true }
-vim.keymap.set('n', '<Leader>le', ':Lex 20<Cr>', opts)
-vim.keymap.set('n', '<S-Up>', ':resize +2<CR>', opts)
-vim.keymap.set('n', '<S-Down>', ':resize -2<CR>', opts)
-vim.keymap.set('n', '<S-Left>', ':vertical resize -2<CR>', opts)
-vim.keymap.set('n', '<S-Right>', ':vertical resize +2<CR>', opts)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
