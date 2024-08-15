@@ -2,14 +2,13 @@
 --
 
 ---@param variant {'dark'|'darker'|'cool'|'deep'|'warm'|'warmer'|'light'}
-local setup_onedark = function (variant)
+local setup_onedark = function(variant)
   vim.cmd.colorscheme 'onedark'
   require('onedark').setup { style = variant }
 end
 
 return {
   'nvim-lualine/lualine.nvim',
-
   dependencies = {
     { 'navarasu/onedark.nvim',    priority = 1000 },
     { 'folke/tokyonight.nvim',    priority = 1001 },
@@ -19,7 +18,6 @@ return {
     { 'rose-pine/neovim',         priority = 1005, name = 'rose-pine' },
     { 'AlexvZyl/nordic.nvim',     priority = 1007 },
   },
-
   config = function()
     -- onedark variations
     --vim.cmd.colorscheme 'onedark'
@@ -46,17 +44,17 @@ return {
     --vim.cmd.colorscheme 'aura-soft-dark-soft-text'
 
     -- kanagawa
-    --vim.cmd.colorscheme 'kanagawa-wave'     -- dark-blue
+    vim.cmd.colorscheme 'kanagawa-wave'   -- dark-blue
     --vim.cmd.colorscheme 'kanagawa-dragon' -- dark
-    --vim.cmd.colorscheme 'kanagawa-lotus'  -- solarized
+    -- vim.cmd.colorscheme 'kanagawa-lotus'  -- solarized
 
     -- rose-pine
     --vim.cmd.colorscheme 'rose-pine'
     --vim.cmd.colorscheme 'rose-pine-moon'
-    --vim.cmd.colorscheme 'rose-pine-dawn' -- light
-    
+    -- vim.cmd.colorscheme 'rose-pine-dawn' -- light
+
     -- nordic
-    vim.cmd.colorscheme 'nordic'
+    --vim.cmd.colorscheme 'nordic'
 
     -- See `:help lualine.txt`
     -- See: https://github.com/nvim-lualine/lualine.nvim#default-configuration
@@ -64,10 +62,8 @@ return {
       options = {
         theme = 'auto',
         icons_enabled = true,
-
         component_separators = '|',
         section_separators = '',
-
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch', 'diff', 'diagnostics' },

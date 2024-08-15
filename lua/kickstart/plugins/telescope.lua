@@ -3,7 +3,6 @@
 
 return {
   'nvim-telescope/telescope.nvim',
-
   dependencies = {
     -- Utility functions
     'nvim-lua/plenary.nvim',
@@ -21,7 +20,6 @@ return {
       end,
     },
   },
-
   config = function()
     -- [[ Configure Telescope ]]
     -- See `:help telescope` and `:help telescope.setup()`

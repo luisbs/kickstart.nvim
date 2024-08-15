@@ -67,7 +67,7 @@ local mason_config = {
     'vim-language-server', -- vimls
     'lua-language-server', -- lua_ls
     'stylelint-lsp',       -- stylelint_lsp
-    'phpactor',            --'psalm', -- PHP
+    --'phpactor',            --'psalm', -- PHP -- NOTE: fails cause of missing dependency
 
 
     -- DAP

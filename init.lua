@@ -1,5 +1,4 @@
 --[[
-
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -35,7 +34,6 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now :)
 --]]
-
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -69,17 +67,14 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   'gioele/vim-autoswap',
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
 
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
-
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+  {
+    -- Adds git signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
@@ -93,8 +88,21 @@ require('lazy').setup({
     },
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  -- Keymaps/commands related plugins
+  { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
+  { 'folke/which-key.nvim',  opts = {} }, -- Show pending keybinds
+  {
+    'mrjones2014/legendary.nvim',         -- Handles all your keymaps/commands
+    -- dependencies = { 'kkharji/sqlite.lua' } -- sqlite is needed only if frecency-sorting is desired
+    priority = 10000,                     -- should be loded before other plugins
+    enabled = false,
+    lazy = false,
+    --opts = { extensions = { lazy_nvim = true } },
+    config = function()
+      require('legendary').setup({ extensions = { lazy_nvim = true } })
+    end
+  },
+
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -108,11 +116,12 @@ require('lazy').setup({
   require 'kickstart.plugins.treesitter',
   -- Code Completion
   require 'kickstart.plugins.completion',
-  -- UI Plugins
+  -- UX/UI Plugins
   require 'kickstart.plugins.theme',
   require 'kickstart.plugins.telescope',
-  require 'kickstart.plugins.harpoon',
+  --require 'kickstart.plugins.harpoon',
   require 'kickstart.plugins.diffview',
+  --require 'kickstart.plugins.explorer',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -122,11 +131,15 @@ require('lazy').setup({
   --
   --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
-  { import = 'custom.plugins' },
+  { import = 'plugins.ui' },
+  { import = 'plugins.ux' },
 }, {})
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+
+-- Change pwd to current filepath
+vim.o.autochdir = false
 
 -- Set highlight on search
 vim.o.hlsearch = false
@@ -169,6 +182,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set('n', '<C-u>', ':undo<CR>', { noremap = true, silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
