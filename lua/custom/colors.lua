@@ -1,30 +1,52 @@
---
 -- Custom colors used on the configuration files
 --
 
-return {
-  rainbow = { '#E06C75', '#E5C07B', '#98C379', '#56B6C2', '#61AFEF', '#C678DD' },
-  setup = function()
-    vim.opt.termguicolors = true
-    --vim.cmd [[highlight IndentDark  guifg=#1F1F1F gui=nocombine]]
-    --vim.cmd [[highlight IndentLight guifg=#1A1A1A gui=nocombine]]
-  end,
+local M = {}
+-- setup = function()
+-- end,
 
-  -- utility functions
-  add_fg = function(prefix, colors)
-    local names = {}
-    for index, color in pairs(colors) do
-      names[index] = prefix .. index
-      vim.cmd(string.format('highlight %s guifg=%s gui=nocombine', names[index], color))
-    end
-    return names
-  end,
-  add_bg = function(prefix, colors)
-    local names = {}
-    for index, color in pairs(colors) do
-      names[index] = prefix .. index
-      vim.cmd(string.format('highlight %s guibg=%s gui=nocombine', names[index], color))
-    end
-    return names
-  end,
+---@type table<string, string>
+M.grayscale = {
+	GrayscaleDark  = '#1F1F1F',
+	GrayscaleLight = '#1A1A1A',
 }
+
+---@type table<string, string>
+M.rainbow = {
+	RainbowRed = '#E06C75',
+	RainbowOrange = '#D19A66',
+	-- RainbowYellow = '#E5C07B',
+	RainbowGreen = '#98C379',
+	RainbowCyan = '#56B6C2',
+	RainbowBlue = '#61AFEF',
+	RainbowViolet = '#C678DD',
+}
+
+---Set the passed colors as foreground & background
+---@param prefix string
+---@param colors Map<string, string>
+M.setColorsTogether = function(prefix, colors)
+	for name, color in pairs(colors) do
+		vim.api.nvim_set_hl(0, prefix .. name, { fg = color, bg = color })
+	end
+end
+
+---Set the passed colors as foreground
+---@param prefix string
+---@param colors Map<string, string>
+M.setColorsForeground = function(prefix, colors)
+	for name, color in pairs(colors) do
+		vim.api.nvim_set_hl(0, prefix .. name, { fg = color })
+	end
+end
+
+---Set the passed colors as background
+---@param prefix string
+---@param colors Map<string, string>
+M.setColorsBackground = function(prefix, colors)
+	for name, color in pairs(colors) do
+		vim.api.nvim_set_hl(0, prefix .. name, { bg = color })
+	end
+end
+
+return M

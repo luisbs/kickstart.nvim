@@ -3,7 +3,6 @@
 
 return {
   'hrsh7th/nvim-cmp',
-
   dependencies = {
     -- Visual customization of completion window.
     'onsails/lspkind.nvim',
@@ -11,10 +10,9 @@ return {
     -- Snippets engine
     'L3MON4D3/LuaSnip',
 
-    'hrsh7th/cmp-nvim-lsp', -- enables completion from lsp's
+    'hrsh7th/cmp-nvim-lsp',    -- enables completion from lsp's
     'saadparwaiz1/cmp_luasnip' -- enables completion from snippets
   },
-
   config = function()
     local cmp = require 'cmp'         -- hrsh7th/nvim-cmp
     local luasnip = require 'luasnip' -- L3MON4D3/LuaSnip
@@ -26,7 +24,7 @@ return {
     cmp.setup {
       sources = {
         { name = 'nvim_lsp' }, -- hrsh7th/cmp-nvim-lsp
-        { name = 'luasnip' }, -- saadparwaiz1/cmp_luasnip
+        { name = 'luasnip' },  -- saadparwaiz1/cmp_luasnip
       },
       snippet = {
         expand = function(args)
@@ -45,10 +43,10 @@ return {
         },
       },
       mapping = cmp.mapping.preset.insert {
-        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete {},
-        ['<C-q>'] = cmp.mapping.abort(),
+        ['<A-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<A-f>'] = cmp.mapping.scroll_docs(4),
+        ['<A-q>'] = cmp.mapping.abort(),
         ['<CR>'] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Replace,
           select = true,

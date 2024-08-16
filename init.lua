@@ -1,5 +1,4 @@
 --[[
-
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
@@ -61,17 +60,14 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
   'gioele/vim-autoswap',
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
 
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-
-  -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
-
-  -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+  {
+    -- Adds git signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
@@ -85,8 +81,21 @@ require('lazy').setup({
     },
   },
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  -- Keymaps/commands related plugins
+  { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
+  { 'folke/which-key.nvim',  opts = {} }, -- Show pending keybinds
+  {
+    'mrjones2014/legendary.nvim',         -- Handles all your keymaps/commands
+    -- dependencies = { 'kkharji/sqlite.lua' } -- sqlite is needed only if frecency-sorting is desired
+    priority = 10000,                     -- should be loded before other plugins
+    enabled = false,
+    lazy = false,
+    --opts = { extensions = { lazy_nvim = true } },
+    config = function()
+      require('legendary').setup({ extensions = { lazy_nvim = true } })
+    end
+  },
+
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -102,11 +111,9 @@ require('lazy').setup({
   require 'plugins.completion',
   -- Theaming Plugins
   require 'plugins.theme',
-  require 'plugins.indent-blankline',
   require 'plugins.colorizer',
   -- UI Plugins
   require 'plugins.telescope',
-  require 'plugins.harpoon',
   require 'plugins.diffview',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.luaplugins.indent-blankline`
@@ -117,7 +124,8 @@ require('lazy').setup({
   --
   --    An additional note is that if you only copied in the `init.lua`, you can just comment this line
   --    to get rid of the warning telling you that there are not plugins in `lua/custom/plugins/`.
-  { import = 'custom.plugins' },
+  { import = 'plugins.ui' },
+  { import = 'plugins.ux' },
 }, {})
 
 --
@@ -130,6 +138,7 @@ require('lazy').setup({
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set('n', '<C-u>', ':undo<CR>', { noremap = true, silent = true })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
