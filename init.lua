@@ -120,14 +120,12 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
-
+--
 -- [[ Basic Keymaps ]]
+--
+
+-- Helps
+-- Regex search `:help \v` or see: https://vimdoc.sourceforge.net/htmldoc/pattern.html#/%5Cv
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -148,8 +146,26 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- Helps
--- Regex search `:help \v` or see: https://vimdoc.sourceforge.net/htmldoc/pattern.html#/%5Cv
+local nmap = function(keys, desc, func)
+  vim.keymap.set('n', keys, func, { noremap = true, silent = true, desc = 'LB: ' .. desc })
+end
+
+nmap('<Leader>le', 'Open File [ex]plorer on Side Panel', ':Lex 20<CR>')
+
+--nmap('<S-Up>',    'Increment Panel Size Height', ':resize +2<CR>')
+--nmap('<S-Down>',  'Decrement Panel Size Height', ':resize -2<CR>')
+--nmap('<S-Left>',  'Decrement Panel Size Width', ':vertical resize -2<CR>')
+--nmap('<S-Right>', 'Increment Panel Size Width', ':vertical resize +2<CR>')
+
+--nmap('<S-Up>', 'Increment Panel Size Height', ':wincmd +<CR>')
+--nmap('<S-Down>', 'Decrement Panel Size Height', ':wincmd -<CR>')
+--nmap('<S-Left>', 'Decrement Panel Size Width', ':wincmd <<CR>')
+--nmap('<S-Right>', 'Increment Panel Size Width', ':wincmd ><CR>')
+
+--nmap('<C-k>', 'Move to Upper Panel', ':wincmd k<CR>')
+--nmap('<C-j>', 'Move to Bottom Panel', ':wincmd j<CR>')
+--nmap('<C-h>', 'Move to Left Panel', ':wincmd h<CR>')
+--nmap('<C-l>', 'Move to Right Panel', ':wincmd l<CR>')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
