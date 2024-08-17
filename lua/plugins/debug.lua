@@ -11,6 +11,7 @@ return {
   'mfussenegger/nvim-dap',
 
   -- NOTE: And you can specify dependencies as well
+  enabled = false,
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',

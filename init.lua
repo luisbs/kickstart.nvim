@@ -35,6 +35,8 @@ P.S. You can delete this when you're done too. It's your config now :)
 --]]
 
 require('custom.base')
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+vim.keymap.set({ 'n', 'v' }, '<A>', '<Nop>', { silent = true })
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -110,7 +112,7 @@ require('lazy').setup({
   -- Code Completion
   require 'plugins.completion',
   -- Theaming Plugins
-  require 'plugins.theme',
+  -- require 'plugins.theme',
   require 'plugins.colorizer',
   -- UI Plugins
   require 'plugins.telescope',
@@ -137,7 +139,7 @@ require('lazy').setup({
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+-- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', '<C-u>', ':undo<CR>', { noremap = true, silent = true })
 
 -- Remap for dealing with word wrap
