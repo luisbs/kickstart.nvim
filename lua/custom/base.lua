@@ -4,23 +4,23 @@
 ===== See `:help vim.o`                                         =====
 =====================================================================
 --]]
-
 --
 -- [[ Enviroment Options ]]
 --
 
-vim.o.encoding        = "utf-8" -- Just in case
+vim.o.encoding      = "utf-8" -- Just in case
 
 -- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors   = true
+vim.o.termguicolors = true
 
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard       = 'unnamedplus'
+vim.o.clipboard     = 'unnamedplus'
 
 -- Enable mouse mode
-vim.o.mouse           = 'a'
+vim.o.mouse         = 'a'
+vim.cmd [[set nofoldenable]] -- disable code folding
 
 -- Save undo history
 vim.o.undofile        = true
@@ -57,8 +57,8 @@ vim.o.smartcase       = true
 vim.opt.splitright    = true
 vim.opt.splitbelow    = true
 
-vim.opt.tabstop       = 4     -- Tab size of 4 spaces
-vim.opt.softtabstop   = 4     -- On insert use 4 spaces for tab
+vim.opt.tabstop       = 4 -- Tab size of 4 spaces
+vim.opt.softtabstop   = 4 -- On insert use 4 spaces for tab
 --vim.opt.shiftwidth    = 0     -- Number of spaces to use for each step of (auto)indent
 --vim.opt.expandtab     = true  -- Use appropriate number of spaces (no so good for PHP but we can fix this in ft)
 
@@ -74,5 +74,5 @@ vim.opt.signcolumn    = "yes" -- Always show the signcolumn, otherwise it would 
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader       = ' '
+vim.g.maplocalleader  = ' '
