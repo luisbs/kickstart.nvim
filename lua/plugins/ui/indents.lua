@@ -10,7 +10,7 @@ local colors = require('custom.colors')
 local setSpecialCharacters = function()
 	vim.opt.list = true
 	--vim.opt.listchars = --'tab:> ,trail:-,nbsp:+'
-	tables.appendOpts(vim.opt.listchars, { 'eol:↴', 'tab:·•·', 'space:·' }) -- 'multispace:'
+	tables.appendOpts(vim.opt.listchars, { 'eol:↴', 'tab:·•', 'space:·' }) -- 'multispace:'
 	tables.appendOpts(vim.opt.listchars, { 'trail:•', 'nbsp:•', }) -- 'lead:┄'
 	tables.appendOpts(vim.opt.listchars, { 'extends:≻', 'precedes:≺' })
 	--
@@ -43,7 +43,7 @@ return {
 
 		--- reset colors every time the colorscheme changes
 		local hooks = require('ibl.hooks')
-		hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
+		-- hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 		hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
 			colors.setColorsTogether('hl', colors.rainbow)
 			colors.setColorsForeground('fg', colors.rainbow)
@@ -51,7 +51,7 @@ return {
 		end)
 
 		setSpecialCharacters()
-		require('rainbow-delimiters.setup').setup { highlight = bg_rainbow }
+		-- require('rainbow-delimiters.setup').setup { highlight = bg_rainbow }
 		require('ibl').setup {
 			--- RainbowBlocks
 			-- whitespace = { remove_blankline_trail = false, highlight = hl_rainbow }, -- SolidBlocks

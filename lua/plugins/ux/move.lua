@@ -9,12 +9,12 @@ end
 return {
   'fedepujol/move.nvim',
   config = function()
-    require('move').setup({
+    require('move').setup {
       block = { enable = true, indent = true },
       line = { enable = true, indent = true },
       word = { enable = false },
       char = { enable = false },
-    })
+    }
 
     -- Normal mode
     map('n', '<A-Up>', 'Line Up', ':MoveLine(-1)<CR>')
