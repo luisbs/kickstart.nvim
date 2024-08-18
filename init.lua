@@ -2,21 +2,23 @@
 =====================================================================
 ==================== READ THIS BEFORE CONTINUING ====================
 =====================================================================
+-- vim: ts=4 sts=4 sw=2 et
+-- The line above this is called `modeline`. See `:help modeline`
 
 Kickstart.nvim is *not* a distribution.
 
 Kickstart.nvim is a template for your own configuration.
-  The goal is that you can read every line of code, top-to-bottom, and understand
-  what your configuration is doing.
+	The goal is that you can read every line of code, top-to-bottom, and understand
+	what your configuration is doing.
 
-  Once you've done that, you should start exploring, configuring and tinkering to
-  explore Neovim!
+	Once you've done that, you should start exploring, configuring and tinkering to
+	explore Neovim!
 
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
+	If you don't know anything about Lua, I recommend taking some time to read through
+	a guide. One possible example:
+	- https://learnxinyminutes.com/docs/lua/
 
-  And then you can explore or search through `:help lua-guide`
+	And then you can explore or search through `:help lua-guide`
 
 Kickstart Guide:
 
@@ -33,7 +35,6 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now :)
 --]]
-
 require('custom.base')
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v' }, '<A>', '<Nop>', { silent = true })
@@ -68,28 +69,14 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
-  {
-    -- Adds git signs to the gutter, as well as utilities for managing changes
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
 
   -- Keymaps/commands related plugins
   { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
   { 'folke/which-key.nvim',  opts = {} }, -- Show pending keybinds
   {
-    'mrjones2014/legendary.nvim',         -- Handles all your keymaps/commands
+    'mrjones2014/legendary.nvim',        -- Handles all your keymaps/commands
     -- dependencies = { 'kkharji/sqlite.lua' } -- sqlite is needed only if frecency-sorting is desired
-    priority = 10000,                     -- should be loded before other plugins
+    priority = 10000,                    -- should be loded before other plugins
     enabled = false,
     lazy = false,
     --opts = { extensions = { lazy_nvim = true } },
@@ -111,12 +98,9 @@ require('lazy').setup({
   require 'plugins.mason',
   -- Code Completion
   require 'plugins.completion',
-  -- Theaming Plugins
-  -- require 'plugins.theme',
   require 'plugins.colorizer',
   -- UI Plugins
   require 'plugins.telescope',
-  require 'plugins.diffview',
 
   -- NOTE: The import below automatically adds your own plugins, configuration, etc from `lua/custom/plugins/*.luaplugins.indent-blankline`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
@@ -136,6 +120,16 @@ require('lazy').setup({
 
 -- Helps
 -- Regex search `:help \v` or see: https://vimdoc.sourceforge.net/htmldoc/pattern.html#/%5Cv
+local nmap = require('lua.custom.nvim').group_nmap('LB: ', { noremap = true, silent = true })
+
+-- Terminal interactions
+nmap('<C-\\>', 'Open a Terminal', ':80vsplit<CR> :terminal<CR>')
+vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
+  pattern = '*',
+  callback = function()
+    if vim.opt.buftype:get() == 'terminal' then vim.cmd(':startinsert') end
+  end
+})
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -157,10 +151,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-local nmap = function(keys, desc, func)
-  vim.keymap.set('n', keys, func, { noremap = true, silent = true, desc = 'LB: ' .. desc })
-end
-
 nmap('<Leader>le', 'Open File [ex]plorer on Side Panel', ':Lex 20<CR>')
 
 --nmap('<S-Up>',    'Increment Panel Size Height', ':resize +2<CR>')
@@ -177,6 +167,3 @@ nmap('<Leader>le', 'Open File [ex]plorer on Side Panel', ':Lex 20<CR>')
 --nmap('<C-j>', 'Move to Bottom Panel', ':wincmd j<CR>')
 --nmap('<C-h>', 'Move to Left Panel', ':wincmd h<CR>')
 --nmap('<C-l>', 'Move to Right Panel', ':wincmd l<CR>')
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et

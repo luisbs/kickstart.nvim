@@ -8,7 +8,10 @@
 -- [[ Enviroment Options ]]
 --
 
--- vim.o.encoding      = "utf-8" -- Just in case
+vim.o.encoding      = "utf-8" -- Just in case
+
+-- Avoid file-especific configuration
+vim.o.modeline      = false
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
