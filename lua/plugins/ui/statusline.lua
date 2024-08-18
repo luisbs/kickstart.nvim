@@ -1,6 +1,7 @@
---- Configuration of nvim bottom status line
---- see: https://github.com/nvim-lualine/lualine.nvim
---- See `:help lualine.txt`
+-- Customization of the status line
+-- see https://github.com/nvim-lualine/lualine.nvim
+-- see `:help lualine`
+--
 
 return {
 	'nvim-lualine/lualine.nvim',

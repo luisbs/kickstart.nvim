@@ -8,7 +8,7 @@
 -- [[ Enviroment Options ]]
 --
 
-vim.o.encoding      = "utf-8" -- Just in case
+-- vim.o.encoding      = "utf-8" -- Just in case
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
@@ -20,22 +20,24 @@ vim.o.clipboard     = 'unnamedplus'
 
 -- Enable mouse mode
 vim.o.mouse         = 'a'
-vim.cmd [[set nofoldenable]] -- disable code folding
 
 -- Save undo history
-vim.o.undofile        = true
+vim.o.undofile      = true
 
 -- Decrease update time
-vim.o.updatetime      = 250
-vim.o.timeoutlen      = 300
-vim.o.timeout         = true
+vim.o.updatetime    = 250
+vim.o.timeoutlen    = 300
+vim.o.timeout       = true
 
 -- Set completeopt to have a better completion experience
 --vim.o.completeopt     = 'menuone,noselect'
-vim.o.completeopt     = 'menu,menuone,noselect,noinsert'
+vim.o.completeopt   = 'menu,menuone,noselect,noinsert'
 
 -- Enable break indent
-vim.o.breakindent     = true
+vim.o.breakindent   = true
+
+-- disable code folding
+vim.cmd [[set nofoldenable]]
 
 --
 -- [[ Editor Options ]]

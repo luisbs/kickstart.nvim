@@ -1,6 +1,6 @@
---- This file modifies the core UI hooks (select, input, etc)
---- see: https://github.com/stevearc/dressing.nvim
----
+-- Customization of the core UI hooks (select, input, etc)
+-- see https://github.com/stevearc/dressing.nvim
+--
 
 return {
 	'stevearc/dressing.nvim',

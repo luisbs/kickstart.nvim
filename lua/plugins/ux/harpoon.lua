@@ -1,6 +1,6 @@
---- This file enables the usage of harpoon.
---- see https://github.com/ThePrimeagen/harpoon
----
+-- Mark and access files faster.
+-- see https://github.com/ThePrimeagen/harpoon
+-- see `:help harpoon`
 
 local function toggle_telescope_menu(tpicker, tfinder, tconfig, harpoon_files)
 	local file_paths = {}
@@ -33,7 +33,7 @@ return {
 		local tfinder = require('telescope.finders').new_table
 
 		-- keymappings
-		local nmap = require('custom.nvim').group_nmap('Harpoon: ', true, false)
+		local nmap = require('custom.nvim').group_nmap('Harpoon: ', { noremap = true, silent = true })
 		nmap('<A-m>', '[m]ark the current file', function() harpoon:list():add() end)
 		-- nmap('<A-n>', 'u[n]mark the current file', function() harpoon:list():remove() end) -- [0378a6c] unexpected: clears list on some cases
 		nmap('<A-c>', '[c]lear all marked files', function() harpoon:list():clear() end)
@@ -47,7 +47,7 @@ return {
 
 		-- Individual references for Harpoon files
 		for i = 1, 9 do
-			nmap('<leader>' .. i, 'Navigates to file [' .. i .. ']', function() harpoon:list():select(i) end)
+			nmap('<A-' .. i .. '>', 'Navigates to file [' .. i .. ']', function() harpoon:list():select(i) end)
 		end
 	end
 }

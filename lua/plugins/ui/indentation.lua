@@ -1,8 +1,8 @@
---- Enables code indentation highlights
---- see: https://github.com/lukas-reineke/indent-blankline.nvim
---- see: https://gitlab.com/HiPhish/rainbow-delimiters.nvim
---- see: https://unicode-explorer.com/search/
----
+-- Highlights indentation and shows non-printable characters
+-- see https://github.com/lukas-reineke/indent-blankline.nvim
+-- see https://gitlab.com/HiPhish/rainbow-delimiters.nvim
+-- see https://unicode-explorer.com/search/
+--
 
 local tables = require('custom.tables')
 local colors = require('custom.colors')

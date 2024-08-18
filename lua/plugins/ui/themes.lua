@@ -1,4 +1,7 @@
--- This file sets the current theme an other visual styling settings
+-- Themes management
+-- see https://github.com/luisbs/themery.nvim
+-- see https://github.com/zaldih/themery.nvim
+-- see `:help themery`
 --
 
 ---@param variant 'dark'|'darker'|'cool'|'deep'|'warm'|'warmer'|'light'
