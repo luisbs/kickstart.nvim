@@ -15,7 +15,7 @@ return {
 			--
 			-- [[ visual cues ]]
 			numhl                        = true, -- :Gitsigns toggle_numhl
-			linehl                       = true, -- :Gitsigns toggle_linehl
+			linehl                       = false, -- :Gitsigns toggle_linehl
 			word_diff                    = false, -- :Gitsigns toggle_word_diff
 			signcolumn                   = true, -- :Gitsigns toggle_signs
 			signs                        = {
