@@ -71,7 +71,6 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Keymaps/commands related plugins
-  { 'numToStr/Comment.nvim', opts = {} }, -- "gc" to comment visual regions/lines
   { 'folke/which-key.nvim',  opts = {} }, -- Show pending keybinds
   {
     'mrjones2014/legendary.nvim',        -- Handles all your keymaps/commands

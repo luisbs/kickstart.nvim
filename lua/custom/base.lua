@@ -62,8 +62,8 @@ vim.o.smartcase       = true
 vim.opt.splitright    = true
 vim.opt.splitbelow    = true
 
-vim.opt.tabstop       = 4 -- Tab size of 4 spaces
-vim.opt.softtabstop   = 4 -- On insert use 4 spaces for tab
+vim.opt.tabstop       = 8 -- Tab size of 4 spaces
+vim.opt.softtabstop   = 8 -- On insert use 4 spaces for tab
 --vim.opt.shiftwidth    = 0     -- Number of spaces to use for each step of (auto)indent
 --vim.opt.expandtab     = true  -- Use appropriate number of spaces (no so good for PHP but we can fix this in ft)
 
