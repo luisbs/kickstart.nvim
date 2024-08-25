@@ -10,11 +10,11 @@ local colors = require('custom.colors')
 local setSpecialCharacters = function()
 	vim.opt.list = true
 	--vim.opt.listchars = --'tab:> ,trail:-,nbsp:+'
-	tables.appendOpts(vim.opt.listchars, { 'eol:↴', 'tab:·•', 'space:·' }) -- 'multispace:'
+	tables.appendOpts(vim.opt.listchars, { 'eol:↴', 'tab:‣•', 'space:·' }) -- 'multispace:'
 	tables.appendOpts(vim.opt.listchars, { 'trail:•', 'nbsp:•', }) -- 'lead:┄'
 	tables.appendOpts(vim.opt.listchars, { 'extends:≻', 'precedes:≺' })
 	--
-	-- u21b4:↴ u00b7:· u2022:•
+	-- u21b4:↴ u00b7:· u2022:• u2023:‣
 	-- u2015:― u2594:▔
 	-- u2500:─ u254c:╌ u2504:┄ u2508:┈ u2574:╴ u2578:╸
 	-- u2501:━ u254d:╍ u2505:┅ u2509:┉ u2576:╶ u257a:╺

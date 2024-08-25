@@ -14,11 +14,9 @@ return {
 
 
 		local map = require('custom.nvim').group_map('Move: ', { noremap = true, silent = true })
-		map('n', '<A-Up>', 'Line Up', ':MoveLine(-1)<CR>')
-		map('n', '<A-Down>', 'Line Down', ':MoveLine(1)<CR>')
-		-- map('n', '<A-Right>', 'Word Right', ':MoveWord(1)<CR>')
-		-- map('n', '<A-Left>', 'Word Left', ':MoveWord(-1)<CR>')
-		map('v', '<A-Up>', 'Block Up', ':MoveBlock(-1)<CR>')
-		map('v', '<A-Down>', 'Block Down', ':MoveBlock(1)<CR>')
+		map('n', '<S-Up>', 'Line Up', ':MoveLine(-1)<CR>')
+		map('n', '<S-Down>', 'Line Down', ':MoveLine(1)<CR>')
+		map('v', '<S-Up>', 'Block Up', ':MoveBlock(-1)<CR>')
+		map('v', '<S-Down>', 'Block Down', ':MoveBlock(1)<CR>')
 	end,
 }

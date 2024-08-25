@@ -119,10 +119,10 @@ require('lazy').setup({
 
 -- Helps
 -- Regex search `:help \v` or see: https://vimdoc.sourceforge.net/htmldoc/pattern.html#/%5Cv
-local nmap = require('lua.custom.nvim').group_nmap('LB: ', { noremap = true, silent = true })
+local map = require('lua.custom.nvim').group_map('LB: ', { noremap = true, silent = false })
 
 -- Terminal interactions
-nmap('<C-\\>', 'Open a Terminal', ':80vsplit<CR> :terminal<CR>')
+map('n', '<M-Bslash>', 'Open a Terminal', '<CMD>90vsplit<CR><CMD>terminal<CR>')
 vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
   pattern = '*',
   callback = function()
@@ -133,7 +133,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen', 'BufEnter' }, {
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 -- vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-vim.keymap.set('n', '<C-u>', ':undo<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-u>', ':undo<CR>', { noremap = true, silent = false })
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -150,19 +150,24 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-nmap('<Leader>le', 'Open File [ex]plorer on Side Panel', ':Lex 20<CR>')
+-- nmap('<Leader>le', 'Open File [ex]plorer on Side Panel', ':Lex 20<CR>')
 
---nmap('<S-Up>',    'Increment Panel Size Height', ':resize +2<CR>')
---nmap('<S-Down>',  'Decrement Panel Size Height', ':resize -2<CR>')
---nmap('<S-Left>',  'Decrement Panel Size Width', ':vertical resize -2<CR>')
---nmap('<S-Right>', 'Increment Panel Size Width', ':vertical resize +2<CR>')
+map('n', '<M-+>', 'Increment Panel Size Height', ':resize +2<CR>')
+map('n', '<M-->', 'Decrement Panel Size Height', ':resize -2<CR>')
+map('n', '<M-,>', 'Decrement Panel Size Width', ':vertical resize -2<CR>')
+map('n', '<M-.>', 'Increment Panel Size Width', ':vertical resize +2<CR>')
 
---nmap('<S-Up>', 'Increment Panel Size Height', ':wincmd +<CR>')
---nmap('<S-Down>', 'Decrement Panel Size Height', ':wincmd -<CR>')
---nmap('<S-Left>', 'Decrement Panel Size Width', ':wincmd <<CR>')
---nmap('<S-Right>', 'Increment Panel Size Width', ':wincmd ><CR>')
+map('n', '<M-Up>', 'LB: Move to Upper Panel', '<C-w>k')
+map('n', '<M-Down>', 'LB: Move to Down Panel', '<C-w>j')
+map('n', '<M-Left>', 'LB: Move to Left Panel', '<C-w>h')
+map('n', '<M-Right>', 'LB: Move to Right Panel', '<C-w>l')
 
---nmap('<C-k>', 'Move to Upper Panel', ':wincmd k<CR>')
---nmap('<C-j>', 'Move to Bottom Panel', ':wincmd j<CR>')
---nmap('<C-h>', 'Move to Left Panel', ':wincmd h<CR>')
---nmap('<C-l>', 'Move to Right Panel', ':wincmd l<CR>')
+map('t', '<M-Up>', 'LB: Move to Upper Panel', '<C-\\><C-n><C-w>k')
+map('t', '<M-Down>', 'LB: Move to Down Panel', '<C-\\><C-n><C-w>j')
+map('t', '<M-Left>', 'LB: Move to Left Panel', '<C-\\><C-n><C-w>h')
+map('t', '<M-Right>', 'LB: Move to Right Panel', '<C-\\><C-n><C-w>l')
+
+map({ 'i', 'v' }, '<M-Up>', 'LB: Move to Upper Panel', '<ESC><C-w>k')
+map({ 'i', 'v' }, '<M-Down>', 'LB: Move to Down Panel', '<ESC><C-w>j')
+map({ 'i', 'v' }, '<M-Left>', 'LB: Move to Left Panel', '<ESC><C-w>h')
+map({ 'i', 'v' }, '<M-Right>', 'LB: Move to Right Panel', '<ESC><C-w>l')
