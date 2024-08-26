@@ -150,8 +150,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- nmap('<Leader>le', 'Open File [ex]plorer on Side Panel', ':Lex 20<CR>')
-
 map('n', '<M-+>', 'Increment Panel Size Height', ':resize +2<CR>')
 map('n', '<M-->', 'Decrement Panel Size Height', ':resize -2<CR>')
 map('n', '<M-,>', 'Decrement Panel Size Width', ':vertical resize -2<CR>')
